@@ -1,0 +1,31 @@
+node_modules/
+dist/
+coverage/
+/README.md
+
+# Environment files and local secrets
+**/.env*
+
+**/*.env
+**/*.env.*
+
+**/.env.example*
+**/*.env.example*
+
+database
+
+# Logs and generated files
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+*.tsbuildinfo
+.cache/
+.eslintcache
+
+# Local editor and operating system files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

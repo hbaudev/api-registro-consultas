@@ -1,0 +1,19 @@
+allowBuilds:
+  builds: true
+  esbuild: true
+  odbc: true
+permissions:
+  '@scarf/scarf':
+    build: false
+  '@tree-sitter-grammars/tree-sitter-yaml':
+    build: false
+  bcrypt:
+    build: true
+  builds:
+    skills: true
+  core-js-pure:
+    build: false
+  tree-sitter:
+    build: false
+  tree-sitter-json:
+    build: false

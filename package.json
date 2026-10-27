@@ -1,0 +1,50 @@
+{
+    "name": "registro-consulta-local",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/src/server.js",
+    "scripts": {
+        "build": "tsc",
+        "typecheck": "tsc --noEmit",
+        "test": "tsx --test",
+        "start": "node dist/src/server.js",
+        "dev": "tsx watch src/server.ts",
+        "create-admin": "tsx src/scripts/create-admin.ts",
+        "create-admissionist": "tsx src/scripts/create-admissionist.ts",
+        "reset-admin-password": "tsx src/scripts/reset-admin-password.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "12.11.2",
+            "onFail": "download"
+        }
+    },
+    "packageManager": "pnpm@12.11.2",
+    "type": "module",
+    "dependencies": {
+        "bcrypt": "^6.0.0",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.6",
+        "dotenv": "^18.0.8",
+        "express": "^5.3.0",
+        "express-rate-limit": "^8.7.1",
+        "jsonwebtoken": "^9.0.3",
+        "odbc": "^2.6.0",
+        "swagger-ui-express": "^5.0.1",
+        "zod": "^4.6.7"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^6.0.0",
+        "@types/cookie-parser": "^1.4.9",
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.3",
+        "@types/node": "^24.0.0",
+        "@types/swagger-ui-express": "^4.1.8",
+        "tsx": "^4.20.3",
+        "typescript": "^5.9.2"
+    }
+}
