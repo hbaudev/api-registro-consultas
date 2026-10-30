@@ -1,6 +1,8 @@
 import { getPool } from "../../database/pool.ts";
 import type {
   ExpedientePorInssDatabaseRow,
+  PacienteCompletoParams,
+  PacienteCompletoRow,
   PacienteDatabaseRow,
   PacienteQuery,
 } from "./pacientes.types.ts";
@@ -33,6 +35,14 @@ export async function obtenerExpedientesPorInss(numeroInss: number): Promise<Exp
   const pool = await getPool();
   return pool.query<ExpedientePorInssDatabaseRow>(
     "EXEC [dbo].[sp_ObtenerExpedientePorInss] @NumeroInss = ?",
+    [numeroInss],
+  );
+}
+
+export async function obtenerPacienteCompletoPorInss(numeroInss: number): Promise<PacienteCompletoRow[]> {
+  const pool = await getPool();
+  return pool.query<PacienteCompletoRow>(
+    "EXEC [dbo].[sp_ObtenerPacienteCompletoPorInss] @NumeroInss = ?",
     [numeroInss],
   );
 }

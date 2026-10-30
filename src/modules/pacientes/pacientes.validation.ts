@@ -1,4 +1,4 @@
-import type { PacienteQuery } from "./pacientes.types.ts";
+import type { PacienteQuery, PacienteCompletoQuery } from "./pacientes.types.ts";
 import {
   asRecord,
   parseDigits,
@@ -20,6 +20,18 @@ export function parseListarPacientesQuery(value: unknown): PacienteQuery | undef
     busqueda,
     tipoSeguroId: record.tipoSeguroId === undefined ? null : tipoSeguroId,
     ...paginacion,
+  };
+}
+
+export function parsePacienteCompletoQuery(value: unknown): PacienteCompletoQuery | undefined {
+  const record = asRecord(value);
+  if (!record) return undefined;
+
+  const numeroInss = parseNumeroInss(record.numeroInss);
+  if (numeroInss === undefined) return undefined;
+
+  return {
+    numeroInss,
   };
 }
 

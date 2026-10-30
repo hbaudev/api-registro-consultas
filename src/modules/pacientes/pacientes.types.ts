@@ -5,6 +5,10 @@ export interface PacienteQuery {
   tamanioPagina: number;
 }
 
+export interface PacienteCompletoQuery {
+  numeroInss: number;
+}
+
 export interface Paciente {
   pacienteId: number;
   numeroInss: number | null;
@@ -76,4 +80,38 @@ export interface ExpedientePorInssDatabaseRow {
   FechaCreacion: Date | string;
   FechaModificacion: Date | string | null;
   RegistroAnulado: boolean | number | string;
+}
+
+export interface PacienteCompleto {
+  numeroInss: number;
+  numeroCedula: string | null;
+  nombres: string;
+  apellidos: string;
+  empresa: string | null;
+  codigoTipoSeguro: string;
+  tipoSeguro: string;
+  numeroExpediente: number | null;
+  pacienteEspecial: boolean;
+  autorizadoGerencia: boolean;
+  fechaNacimiento: Date | string | null;
+  fechaCreacionExpediente: Date | string;
+}
+
+export interface PacienteCompletoParams {
+  numeroInss: number | string;
+}
+
+export interface PacienteCompletoRow {
+  NumeroInss: number;
+  NumeroCedula: string | null;
+  Nombres: string;
+  Apellidos: string;
+  Empresa: string | null;
+  CodigoTipoSeguro: string;
+  TipoSeguro: string;
+  NumeroExpediente: number | null;
+  PacienteEspecial: boolean;
+  AutorizadoGerencia: boolean;
+  FechaNacimiento: Date | string | null;
+  FechaCreacionExpediente: Date | string;
 }

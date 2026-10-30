@@ -5,7 +5,9 @@ import type {
   Paciente,
   PacienteDatabaseRow,
   PacienteQuery,
+  PacienteCompletoRow,
   PacientesPage,
+  PacienteCompleto
 } from "./pacientes.types.ts";
 
 function mapPaciente(row: PacienteDatabaseRow): Paciente {
@@ -65,7 +67,29 @@ function mapExpediente(row: ExpedientePorInssDatabaseRow): ExpedientePorInss {
   };
 }
 
+function mapPacienteCompleto(row: PacienteCompletoRow): PacienteCompleto {
+  return {
+    numeroInss: row.NumeroInss,
+    numeroCedula: row.NumeroCedula,
+    nombres: row.Nombres,
+    apellidos: row.Apellidos,
+    empresa: row.Empresa,
+    codigoTipoSeguro: row.CodigoTipoSeguro,
+    tipoSeguro: row.TipoSeguro,
+    numeroExpediente: row.NumeroExpediente,
+    pacienteEspecial: isDatabaseBit(row.PacienteEspecial),
+    autorizadoGerencia: isDatabaseBit(row.AutorizadoGerencia),
+    fechaNacimiento: row.FechaNacimiento,
+    fechaCreacionExpediente: row.FechaCreacionExpediente,
+  };
+}
+
 export async function obtenerExpedientesPorInss(numeroInss: number): Promise<ExpedientePorInss[]> {
   const rows = await pacientesRepository.obtenerExpedientesPorInss(numeroInss);
   return rows.map(mapExpediente);
+}
+
+export async function obtenerPacienteCompletoPorInss(numeroInss: number): Promise<PacienteCompleto[]> {
+  const rows = await pacientesRepository.obtenerPacienteCompletoPorInss(numeroInss);
+  return rows.map(mapPacienteCompleto);
 }

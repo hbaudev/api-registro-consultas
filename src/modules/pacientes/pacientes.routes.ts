@@ -3,6 +3,7 @@ import { requireAuthentication, requireRoles } from "../../middleware/require-au
 import {
   listarPacientesController,
   obtenerExpedientePorInssController,
+  obtenerPacienteCompletoPorInssController,
 } from "./pacientes.controller.ts";
 
 export const pacientesRoutes = Router();
@@ -17,4 +18,9 @@ pacientesRoutes.get(
   "/expediente/:inss",
   requireRoles("Administrador", "Admisionista"),
   obtenerExpedientePorInssController,
+);
+pacientesRoutes.get(
+  "/obtener-paciente-completo/:inss",
+  requireRoles("Administrador", "Admisionista"),
+  obtenerPacienteCompletoPorInssController,
 );
