@@ -9,11 +9,20 @@ import type {
 } from "./programaciones.types.ts";
 
 function mapProgramacion(row: ProgramacionDatabaseRow): Programacion {
+  const limitePacientes = Number(row.LimitePacientes);
+  const cuposOcupados = Number(row.CuposOcupados ?? 0);
+  const cuposDisponibles = Number(row.CuposDisponibles ?? (limitePacientes - cuposOcupados));
+  // El cálculo directo numérico evita el bug de conversión de ODBC donde "0" como string es evaluado como truthy en JS
+  const estaLleno = cuposDisponibles <= 0;
+
   return {
     codigoProgramacion: row.CodigoProgramacion,
     fecha: row.Fecha,
     jornada: row.Jornada,
-    limitePacientes: Number(row.LimitePacientes),
+    limitePacientes,
+    cuposOcupados,
+    cuposDisponibles,
+    estaLleno,
     codigoMinsaMedico: row.CodigoMinsa,
     nombreMedico: row.NombreMedico,
     apellidoMedico: row.ApellidoMedico,
