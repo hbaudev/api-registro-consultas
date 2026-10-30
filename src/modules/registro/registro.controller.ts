@@ -1,6 +1,10 @@
 import type { RequestHandler } from "express";
-import { validarPerCapita, obtenerTiposAfiliado, registrarConsulta } from "./registro.service.ts";
-import { parseNumeroInss, parseCrearConsultaInput } from "./registro.validation.ts";
+import { validarPerCapita, obtenerTiposAfiliado, registrarConsulta, obtenerRegistrosConsultas } from "./registro.service.ts";
+import {
+  parseNumeroInss,
+  parseCrearConsultaInput,
+  parseRegistroConsultaQuery,
+} from "./registro.validation.ts";
 import { RegistroRequestError } from "./registro.errors.ts";
 
 export const validarPerCapitaController: RequestHandler = async (request, response, next) => {
@@ -31,6 +35,27 @@ export const obtenerTipoAfiliadoController: RequestHandler = async (_request, re
     next(error);
   }
 };
+
+export const obtenerRegistrosConsultasController: RequestHandler = async (request, response, next) => {
+  const query = parseRegistroConsultaQuery(request.query);
+  if (!query) {
+    response.status(400).json({
+      error: "Los filtros deben ser validos; fecha debe tener formato YYYY-MM-DD, numeroInss debe ser valido y tamanioPagina debe estar entre 1 y 100.",
+    });
+    return;
+  }
+
+  try {
+    const registros = await obtenerRegistrosConsultas(query);
+    response.status(200).json(registros);
+  } catch (error) {
+    if (error instanceof RegistroRequestError) {
+      response.status(error.status).json({ error: error.message });
+      return;
+    }
+    next(error);
+  }
+}
 
 export const crearConsultaController: RequestHandler = async (request, response, next) => {
   const input = parseCrearConsultaInput(request.body);

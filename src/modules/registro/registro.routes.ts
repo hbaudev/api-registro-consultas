@@ -2,6 +2,7 @@ import { Router } from "express";
 import { requireAuthentication, requireRoles } from "../../middleware/require-auth.ts";
 import {
   crearConsultaController,
+  obtenerRegistrosConsultasController,
   obtenerTipoAfiliadoController,
   validarPerCapitaController,
 } from "./registro.controller.ts";
@@ -26,4 +27,10 @@ registroRoutes.get(
   "/:inss",
   requireRoles("Administrador", "Admisionista"),
   validarPerCapitaController,
+);
+
+registroRoutes.get(
+  "/",
+  requireRoles("Administrador", "Admisionista"),
+  obtenerRegistrosConsultasController,
 );
