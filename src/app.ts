@@ -8,7 +8,7 @@ import { csrfProtection } from "./middleware/csrf.ts";
 import { errorHandler } from "./middleware/error-handler.ts";
 import { authRoutes } from "./modules/auth/auth.routes.ts";
 import { filialesRoutes } from "./modules/filiales/filiales.routes.ts";
-import { ipssRoutes } from "./modules/ipss/ipss.routes.ts";
+import { registroRoutes } from "./modules/registro/registro.routes.ts";
 import { pacientesRoutes } from "./modules/pacientes/pacientes.routes.ts";
 import { especialidadesRoutes } from "./modules/especialidades/especialidades.router.ts";
 import { medicosRoutes } from "./modules/medicos/medicos.routes.ts";
@@ -64,7 +64,8 @@ export function createApp() {
   //Rutas de los modulos
   app.use("/api/auth", authRoutes);
   app.use("/api/filiales", filialesRoutes);
-  app.use("/api/ipss", ipssRoutes);
+  app.use("/api/ipss", registroRoutes);
+  app.use("/api/consultas", registroRoutes);
   app.use("/api/pacientes", pacientesRoutes);
   app.use("/api/especialidades", especialidadesRoutes);
   app.use("/api/medicos", medicosRoutes);
