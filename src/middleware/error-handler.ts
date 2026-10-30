@@ -10,8 +10,15 @@ export const errorHandler: ErrorRequestHandler = (error: unknown, _request, resp
     console.error("Error interno de la API.", { ...details, ...(odbcErrors ? { odbcErrors } : {}) });
   }
 
+  const clientMessage =
+    status < 500 && error instanceof Error && error.message
+      ? error.message
+      : status >= 500
+        ? "Ocurrió un error interno."
+        : "Solicitud inválida.";
+
   response.status(status).json({
-    error: status >= 500 ? "Ocurrió un error interno." : "Solicitud inválida.",
+    error: clientMessage,
   });
 };
 
